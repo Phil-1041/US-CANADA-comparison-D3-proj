@@ -1,0 +1,231 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  letter-spacing: 0.25px;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  #name {
+    font-size: 24px;
+    font-weight: 600;
+    padding: $small-spacing;
+    margin: 0;
+    border-bottom: 2px solid lightgray;
+  }
+
+  &__header {
+    background: $white;
+    height: 100px;
+    padding: $small-spacing;
+    display: flex;
+    align-items: center;
+  }
+
+  #search-header {
+    font-weight: 500;
+    font-size: 30px;
+    margin-left: 100px;
+  }
+
+  #tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #search-bar {
+    display: flex;
+    border-bottom: 1px solid #a6afbe;
+    padding: $small-spacing;
+    align-items: center;
+    justify-content: space-between;
+
+    #search-wrapper {
+      background: rgb(233,236,240);
+      height: 40px;
+      width: 567px; //will need to adapt according to size of search icon
+      border-radius: 3px;
+      padding-left: $small-spacing;
+
+      #search-input {
+        border: 0px;
+        height: 40px;
+        width: 95%;
+        padding: 0;
+        background: inherit;
+        font-size: 16px;
+        font-weight: 300;
+        outline-width: 0;
+        padding-left: 4px;
+      }
+
+    }
+
+    #reset {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 170px;
+      border: 1px solid lightgray;
+      border-radius: 3px;
+      color: dimgray;
+      font-weight: 300;
+      cursor: pointer;
+    }
+
+    #search {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 170px;
+      border-radius: 3px;
+      background: dodgerblue;
+      color: white;
+      font-weight: 300;
+      cursor: pointer;
+      font-family: sans-serif;
+      font-size: 16px;
+      padding: 0;
+      border: none;
+    }
+
+  }
+
+  .unselected {
+    height: 80px;
+    overflow: hidden;
+    
+    i {
+      transform: rotate(180deg);
+    }
+  }
+
+  .item-wrapper {
+    border-bottom: 1px solid #a6afbe;
+  }
+
+  .list-item {
+    margin: $small-spacing;
+    box-sizing: content-box;
+
+    .section {
+      display: flex;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top {
+      color: rgb(37,45,77);
+
+      .fa-icon-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        cursor: pointer;
+        width: 30px;
+      }
+
+      .head-wrapper {
+        margin-left: $base-spacing;
+        width: 100%;
+        display: flex;
+
+        .title {
+          width: 33%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-right: 50px;
+        }
+
+        .channel {
+          width: 35%;
+        }
+
+        .pub-date {
+          width: 25%;
+          font-weight: 300;
+        }
+
+      }
+    }
+
+    .mid {
+  
+      .description {
+        font-weight: 300;
+        color: black;
+        white-space: pre-line;
+      }
+
+      .thumbnail-wrapper {
+        // width: 400px;
+
+        .thumbnail {
+          width: 220px;
+          margin: $small-spacing $base-spacing;
+        }
+      }
+    }
+
+    .bot {
+      // display: flex;
+      // margin: $base-spacing;
+
+      .wrapper {
+        display: flex;
+      }
+      .view-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 220px;
+        padding: 0 $base-spacing;
+        font-weight: 300;
+        color: black;
+      }
+
+      .like-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+      }
+      
+      .stats {
+        display: flex;
+        font-weight: 300;
+        color: black;
+        max-width: 430px;
+      }
+
+      .tag-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+
+    }
+
+  }
+
+  .subtitle {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgb(101,123,143);
+    margin-bottom: 0;
+    margin-top: $small-spacing;
+  }
+
+  footer {
+    height: 100px;
+    background-color: rgb(37,45,77);
+  }
+}
+

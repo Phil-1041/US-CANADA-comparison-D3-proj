@@ -1,0 +1,138 @@
+<div class="page">
+  <div id="name">
+    <%= link_to 'Phil Zheng', '/page' %>
+  </div>
+
+<div class=box-shadow>
+  <div class="page__header">
+    <h2 id="search-header">
+      <%= @search %>
+    </h2>
+  </div>
+</div>
+
+  <div id="tabs">
+    <div class="tab-menu">
+      <div class="tab-menu__item selected" target="#page1">ACCORDIAN</div>
+      <div class="tab-menu__item" target="#page2">GRAPH</div>
+    </div>
+  
+    <div class="tab-content " id="page1">
+      <div class="card box-shadow">
+
+        <div id="search-bar-wrapper">
+          <form id="search-bar" action="/search">
+            <div id="search-wrapper">
+              <i class="fa fa-search"></i>
+              <input id="search-input" name="searchTerm" type="text" placeholder="Text">
+            </div>
+            <div id="reset"> Reset </div>
+            <div id="search" type="submit"> Search </div>
+          </form>
+        </div>
+        <div id="search-result-container">
+          <% @videos["items"].each do |video| %>
+          <div class="item-wrapper unselected" id=<%= video["id"] %>>
+
+            <div class="list-item">
+
+              
+              <div class="top section">
+                <div class="fa-icon-wrapper">
+                  <i class="fa fa-angle-up fa-2x"></i>
+                </div>
+                <div class="head-wrapper">
+                  <p class="title"> <%= video["snippet"]["title"] %> </p>
+                  <p class="channel"> <%= video["snippet"]["channelTitle"] %> </p>
+                  <p class="pub-date"> <%= DateTime.parse(video["snippet"]["publishedAt"]).strftime("%B %e, %Y") %> </p>
+                </div>
+              </div>
+
+              <div class="details">
+
+              <div class="mid section">
+                <a href=<%= "https://www.youtube.com/watch?v=#{video["id"]}" %>>
+                  <div class="thumbnail-wrapper">
+                    <img class="thumbnail" src=<%=video["snippet"]["thumbnails"]["medium"]["url"]%> alt="video-thumbnail">
+                  </div>
+                </a>
+                <div class="desc-wrapper">
+                  <p class="subtitle">DESCRIPTION</p>
+                  <p class="description"> <%= video["snippet"]["description"] %> </p>
+                </div>
+              </div>
+
+              <div class="bot section">
+                
+                <div class="view-wrapper">
+                  <p class="subtitle">VIEW COUNT</p>
+                  <p class="stats"><%= video["statistics"]["viewCount"]%></p>
+                </div>
+                
+                <div class="like-wrapper">
+                  <p class="subtitle">LIKE COUNT</p>
+                  <p class="stats"><%= video["statistics"]["likeCount"]%></p>
+                </div>
+
+                <div class="tag-wrapper">
+                  <p class="subtitle">TAGS</p>
+                  <div class="stats">
+                  <% output = ""%>
+                    <% if video["snippet"]["tags"] != nil %>
+                      <% video["snippet"]["tags"].each_with_index do |tag, i|%>
+                        <% if i == video["snippet"]["tags"].length - 1 %>
+                          <% output += ", " %>
+                          <% output += tag %>
+                          <p class="tag"><%= output %></p>
+                        <% elsif i == 0 %>
+                          <% output += tag %>
+                        <% else %>
+                          <% output += ", " %>
+                          <% output += tag %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+
+              </div>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  
+    <div class="tab-content hidden" id="page2">
+      <div class="card box-shadow">
+        D3 baby
+
+        <div id="d3-graph-1">
+          <script type="text/javascript">
+
+          const svg = d3.select('#d3-graph-1').append('svg')
+            .attr('width', 500)
+            .attr('height', 500)
+            .style('background-color', '#666666')
+
+          
+          svg.selectAll('circle')
+            .data(<%= @vid_data %>)
+          .enter()
+            .append('circle')
+              .attr('id', function(vid) {return vid.id})
+              .attr('cx', function(vid) {return vid.statistics.viewCount})
+              .attr('cy', function(vid) {return vid.statistics.likeCount})
+          </script>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+
+  </footer>
+
+</div>
