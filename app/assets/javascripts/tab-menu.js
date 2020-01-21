@@ -54,7 +54,7 @@ $(document).on('click', '#reset', () => {
     data: { searchTerm: 'Ruby on Rails' },
   }).then(data => {
     $('#search-header').html('Ruby on Rails')
-    $('#search-result-container').html(data.html)
+    $('#tabs').html(data.html)
   }).fail(error => {
     console.log(error)
   })
@@ -86,12 +86,16 @@ $(document).ready( () => {
         data: { searchTerm },
       }).then(data => {
         $('#search-header').html(searchTerm)
-        $('#search-result-container').html(data.html)
+        $('#tab').html(data.html)
       }).fail(error => {
         console.log(error)
       })
     }
   });
+
+  $(document).on('click', '#name', function(){
+    window.location = '/page'
+  })
 
 });
 

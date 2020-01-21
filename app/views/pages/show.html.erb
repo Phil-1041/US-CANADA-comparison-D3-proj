@@ -1,6 +1,6 @@
 <div class="page">
   <div id="name">
-    <%= link_to 'Phil Zheng', '/page' %>
+    Phil Zheng
   </div>
 
 <div class=box-shadow>
@@ -111,19 +111,19 @@
         <div id="d3-graph-1">
           <script type="text/javascript">
 
-          const svg = d3.select('#d3-graph-1').append('svg')
-            .attr('width', 500)
-            .attr('height', 500)
-            .style('background-color', '#666666')
+          // const svg = d3.select('#d3-graph-1').append('svg')
+          //   .attr('width', 500)
+          //   .attr('height', 500)
+          //   .style('background-color', '#666666')
 
           
-          svg.selectAll('circle')
-            .data(<%= @vid_data %>)
-          .enter()
-            .append('circle')
-              .attr('id', function(vid) {return vid.id})
-              .attr('cx', function(vid) {return vid.statistics.viewCount})
-              .attr('cy', function(vid) {return vid.statistics.likeCount})
+          // svg.selectAll('circle')
+          //   .data({})
+          // .enter()
+          //   .append('circle')
+          //     .attr('id', function(vid) {return vid.id})
+          //     .attr('cx', function(vid) {return vid.statistics.viewCount})
+          //     .attr('cy', function(vid) {return vid.statistics.likeCount})
           </script>
         </div>
 
