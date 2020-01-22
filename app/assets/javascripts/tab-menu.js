@@ -27,6 +27,8 @@ $(document).on('click', '.fa-icon-wrapper', function () {
 
 // Youtube Search AJAX Call 
 $(document).on('click', '#search', ()=> {
+  $('#loading-modal').css('display', 'flex')
+
   let searchTerm = $('#search-input').val()
   $('#search-input').val('')
   //persist search without reloading page 
@@ -39,12 +41,15 @@ $(document).on('click', '#search', ()=> {
   }).then( data => {
     $('#search-header').html(searchTerm)
     $('#tabs').html(data.html)
+    $('#loading-modal').css('display', 'none')
   }).fail( error => {
     console.log(error)
+    $('#loading-modal').html('--request failed [Bad Request]--')
   })
 })
 
 $(document).on('click', '#reset', () => {
+  $('#loading-modal').css('display', 'flex')
 
   window.history.pushState("obj or string", "persist-search", `/page`)
 
@@ -55,8 +60,10 @@ $(document).on('click', '#reset', () => {
   }).then(data => {
     $('#search-header').html('Ruby on Rails')
     $('#tabs').html(data.html)
+    $('#loading-modal').css('display', 'none')
   }).fail(error => {
     console.log(error)
+    $('#loading-modal').html('--request failed [Bad Request]--')
   })
 })
 
@@ -76,6 +83,8 @@ $(document).ready( () => {
     if (event.keyCode == 13 && event.target.id == 'search-input') {
       event.preventDefault();
 
+      $('#loading-modal').css('display', 'flex')
+
       let searchTerm = $('#search-input').val()
       $('#search-input').val('')
       window.history.pushState("obj or string", "persist-search", `/page?searchTerm=${searchTerm}`)
@@ -87,8 +96,10 @@ $(document).ready( () => {
       }).then(data => {
         $('#search-header').html(searchTerm)
         $('#tab').html(data.html)
+        $('#loading-modal').css('display', 'none')
       }).fail(error => {
         console.log(error)
+        $('#loading-modal').html('--request failed [Bad Request]--')
       })
     }
   });
