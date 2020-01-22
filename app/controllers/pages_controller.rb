@@ -5,23 +5,15 @@ class PagesController < ApplicationController
     else 
       @search = 'Ruby on Rails'
     end
-    @videos = query_youtubeAPI(@search)
 
-    # yt = YoutubeInteractor.new(@search)
-    # @results = yt.get_search_results
-    # @videos = JSON.parse(@results)
-    
-    # @vid_data = @results
-    # puts '--'
-    # puts @vid_data
-    # puts '--'
+    @results = query_youtubeAPI(@search)
+    @videos = JSON.parse(@results)
+    puts @results.class
   end
   
   def query
     @search = params[:searchTerm]
     @videos = query_youtubeAPI(@search)
-
-    # @vid_data = JSON.generate(@videos['items'])
 
     render json: { html: render_to_string(partial: 'results') }
   end

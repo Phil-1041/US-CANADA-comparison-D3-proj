@@ -16,7 +16,7 @@ class YoutubeInteractor
     @ids = res["items"].collect{ |i| i['id']['videoId'] }
     _url = "#{BASE_URI}videos?part=#{fields}&key=#{KEY}&id=#{@ids.join(',')}"
     res = HTTParty.get(_url).body
-    JSON.parse(res)
+    # JSON.parse(res)
   end
 
   def fields
