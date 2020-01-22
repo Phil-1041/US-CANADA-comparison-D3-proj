@@ -1,6 +1,6 @@
 class YoutubeInteractor
   
-  KEY = 'AIzaSyCP2bQwKWoTPNMMmhuD-dVjjbU8wW1MVgA'
+  KEY = 'AIzaSyByDNkKDVniSbJQFgg_d6fWhvwalDnTvCc'
   BASE_URI = 'https://www.googleapis.com/youtube/v3/'.freeze
 
   def initialize(query = '', ids = [])

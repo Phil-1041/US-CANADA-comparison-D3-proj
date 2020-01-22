@@ -42,6 +42,7 @@ $(document).on('click', '#search', ()=> {
     $('#search-header').html(searchTerm)
     $('#tabs').html(data.html)
     $('#loading-modal').css('display', 'none')
+    $('#my-data').change()
   }).fail( error => {
     console.log(error)
     $('#loading-modal').html('--request failed [Bad Request]--')
@@ -61,6 +62,7 @@ $(document).on('click', '#reset', () => {
     $('#search-header').html('Ruby on Rails')
     $('#tabs').html(data.html)
     $('#loading-modal').css('display', 'none')
+    $('#my-data').change()
   }).fail(error => {
     console.log(error)
     $('#loading-modal').html('--request failed [Bad Request]--')
@@ -97,6 +99,7 @@ $(document).ready( () => {
         $('#search-header').html(searchTerm)
         $('#tab').html(data.html)
         $('#loading-modal').css('display', 'none')
+        $('#my-data').change()
       }).fail(error => {
         console.log(error)
         $('#loading-modal').html('--request failed [Bad Request]--')

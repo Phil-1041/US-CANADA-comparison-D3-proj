@@ -14,5 +14,4 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
-//= require tab-menu.js
 //= require_tree .

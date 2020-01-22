@@ -8,12 +8,14 @@ class PagesController < ApplicationController
 
     @results = query_youtubeAPI(@search)
     @videos = JSON.parse(@results)
-    puts @results.class
+
   end
   
   def query
     @search = params[:searchTerm]
-    @videos = JSON.parse(query_youtubeAPI(@search))
+
+    @results = query_youtubeAPI(@search)
+    @videos = JSON.parse(@results)
 
     render json: { html: render_to_string(partial: 'results') }
   end
