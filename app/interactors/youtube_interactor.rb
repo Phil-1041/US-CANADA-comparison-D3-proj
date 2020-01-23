@@ -10,7 +10,7 @@ class YoutubeInteractor
   end
 
   def get_search_results
-    _url = "#{BASE_URI}search?part=snippet&q=#{@q}&type=video&maxResults=1&key=#{KEY}"
+    _url = "#{BASE_URI}search?part=snippet&q=#{@q}&type=video&maxResults=2&key=#{KEY}"
     searchRes = HTTParty.get(_url).body
     res = JSON.parse(searchRes)
     @ids = res["items"].collect{ |i| i['id']['videoId'] }
