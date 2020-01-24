@@ -71,7 +71,10 @@ $(document).ready( function() {
   svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis); 
+    .call(xAxis)
+    .selectAll("text")
+      .attr("transform", "rotate(90)")
+      .style("text-anchor", "start");
 
   // Create groups for each series, rects for each segment 
   var groups = svg.selectAll("g.stats")
@@ -88,7 +91,7 @@ $(document).ready( function() {
       .attr("y", function (d) { return y(d.y0 + d.y); })
       .attr("height", function (d) { return y(d.y0) - y(d.y0 + d.y); })
       .attr("width", x.rangeBand())
-      .on("mouseover", function () { tooltip.style("display", null); })
+      .on("mouseover", function () { tooltip.style("display", "block"); })
       .on("mouseout", function () { tooltip.style("display", "none"); })
       .on("mousemove", function (d) {
         tooltip.transition()
@@ -110,7 +113,7 @@ $(document).ready( function() {
     .attr("x", width - 18)
     .attr("width", 18)
     .attr("height", 18)
-    .style("fill", function (d, i) { return colors.slice().reverse()[i]; });
+    .style("fill", function (d, i) { return colors.slice()[i]; });
 
   legend.append("text")
     .attr("x", width + 5)
@@ -132,7 +135,6 @@ $(document).ready( function() {
 
 //re-draw when search data is updated
 $(document).on('change', '#my-data', function () {
-
   // Setup svg with margins
   var margin = { left: 80, right: 50, top: 50, bottom: 100 };
 
@@ -162,7 +164,7 @@ $(document).on('change', '#my-data', function () {
   // Set x, y and colors
   var x = d3.scale.ordinal()
     .domain(dataset[0].map(function (d) { return d.x; }))
-    .rangeRoundBands([10, width - 10], 0.02);
+    .rangeRoundBands([0, width], 0.10);
 
   var y = d3.scale.linear()
     .domain([0, d3.max(dataset, function (d) { return d3.max(d, function (d) { return d.y0 + d.y; }); })])
@@ -170,17 +172,33 @@ $(document).on('change', '#my-data', function () {
 
   var colors = ["#64aeff", "#aed5ff"];
 
+  // Draw y-axis gridlines first so they appear below the y and x axis
+  function make_y_axis() {
+    return d3.svg.axis()
+      .scale(y)
+      .orient("left")
+      .ticks(13)
+  }
+
+  svg.append("g")
+    .attr("class", "grid")
+    .call(make_y_axis()
+      .tickSize(-width, 0, 0)
+      .tickFormat("")
+    )
+
   // Define and draw axes
   var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
     .ticks(13)
-    .tickSize(-width, 0, 0)
+    .tickSize(10, 0, 0)
     .tickFormat(function (d) { return d });
 
   var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
+    .tickSize(0)
     .tickFormat(function (d) { return d });
 
   svg.append("g")
@@ -190,7 +208,10 @@ $(document).on('change', '#my-data', function () {
   svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    .call(xAxis)
+    .selectAll("text")
+    .attr("transform", "rotate(90)")
+    .style("text-anchor", "start");
 
   // Create groups for each series, rects for each segment 
   var groups = svg.selectAll("g.stats")
@@ -198,6 +219,7 @@ $(document).on('change', '#my-data', function () {
     .enter().append("g")
     .attr("class", "stats")
     .style("fill", function (d, i) { return colors[i]; })
+  // .attr("transform", "translate(0,-10)")
 
   var dataBlocks = groups.selectAll("rect")
     .data(function (d) { return d; })
@@ -206,7 +228,7 @@ $(document).on('change', '#my-data', function () {
     .attr("y", function (d) { return y(d.y0 + d.y); })
     .attr("height", function (d) { return y(d.y0) - y(d.y0 + d.y); })
     .attr("width", x.rangeBand())
-    .on("mouseover", function () { tooltip.style("display", null); })
+    .on("mouseover", function () { tooltip.style("display", "block"); })
     .on("mouseout", function () { tooltip.style("display", "none"); })
     .on("mousemove", function (d) {
       tooltip.transition()
@@ -222,13 +244,13 @@ $(document).on('change', '#my-data', function () {
     .data(colors)
     .enter().append("g")
     .attr("class", "legend")
-    .attr("transform", function (d, i) { return "translate(" + (i * 100 - 200) + ",400)"; });
+    .attr("transform", function (d, i) { return "translate(" + (i * 100 - 515) + ",400)"; });
 
   legend.append("rect")
     .attr("x", width - 18)
     .attr("width", 18)
     .attr("height", 18)
-    .style("fill", function (d, i) { return colors.slice().reverse()[i]; });
+    .style("fill", function (d, i) { return colors.slice()[i]; });
 
   legend.append("text")
     .attr("x", width + 5)
