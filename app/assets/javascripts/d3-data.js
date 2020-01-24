@@ -95,7 +95,7 @@ $(document).ready( function() {
       .on("mouseout", function () { tooltip.style("display", "none"); })
       .on("mousemove", function (d) {
         tooltip.transition()
-                .duration(200)
+                .duration(100)
                 .style("opacity", .9);
         tooltip.html("Views: " + d.viewCount + "<br/>" + "Likes: " + d.likeCount)
                 .style("left", (d3.event.pageX) + "px")
@@ -232,7 +232,7 @@ $(document).on('change', '#my-data', function () {
     .on("mouseout", function () { tooltip.style("display", "none"); })
     .on("mousemove", function (d) {
       tooltip.transition()
-        .duration(200)
+        .duration(100)
         .style("opacity", .9);
       tooltip.html("Views: " + d.viewCount + "<br/>" + "Likes: " + d.likeCount)
         .style("left", (d3.event.pageX) + "px")
