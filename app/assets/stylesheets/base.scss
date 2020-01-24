@@ -57,28 +57,40 @@ body {
 }
 
 .tab-menu {
-  border-bottom: 3px solid #a6afbe;
+  border-bottom: 1px solid #a6afbe;
   display: flex;
   width: 1000px;
   margin-bottom: $small-spacing;
   margin-top: $big-spacing;
 
   .tab-menu__item {
+    color: gray;
     cursor: pointer;
     font-size: 14px;
     font-weight: 300;
     text-align: center;
     text-transform: uppercase;
-    padding-right: 100px;
+    padding-right: 150px;
     padding-left: 20px;
-    padding-bottom: $base-spacing;
-    margin-right: 20px;
+    padding-bottom: 20px;
+    transform: scale(1, .95);
+    -webkit-transform: scale(1, .95); /* Safari and Chrome */
+    -moz-transform: scale(1, .95); /* Firefox */
+    -ms-transform: scale(1, .95); /* IE 9+ */
+    -o-transform: scale(1, .95); /* Opera */
 
     &.selected {
+      color: black;
       font-weight: 600;
-      box-shadow: 0px 3px 0 0 $blue;  
+      box-shadow: 0px 5px 0 0 $blue;  
+      margin-bottom: 3px;
     }
   }
+
+  div:last-child{
+    padding-left: 40px
+  }
+
 }
 
 .hidden {
