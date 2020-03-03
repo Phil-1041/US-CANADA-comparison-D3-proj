@@ -14,7 +14,7 @@ $(document).on('click', '.unselected', function() {
   $(this).addClass('open');
 
   //persisting opened tab on page reload
-  let tabId = $(this).attr('id')
+  var tabId = $(this).attr('id')
   localStorage.setItem("openTab", tabId);
 })
 
@@ -29,7 +29,7 @@ $(document).on('click', '.fa-icon-wrapper', function () {
 $(document).on('click', '#search', ()=> {
   $('#loading-modal').css('display', 'flex')
 
-  let searchTerm = $('#search-input').val()
+  var searchTerm = $('#search-input').val()
   $('#search-input').val('')
   //persist search without reloading page 
   window.history.pushState("obj or string", "persist-search", `/page?searchTerm=${searchTerm}`)
@@ -70,7 +70,7 @@ $(document).on('click', '#reset', () => {
 })
 
 // persisting opened tab on page reload
-let openedTab = localStorage.getItem('openTab')
+var openedTab = localStorage.getItem('openTab')
 
 $(document).ready( () => {
     $('.unselected').each(function () {
@@ -87,7 +87,7 @@ $(document).ready( () => {
 
       $('#loading-modal').css('display', 'flex')
 
-      let searchTerm = $('#search-input').val()
+      var` searchTerm = $('#search-input').val()
       $('#search-input').val('')
       window.history.pushState("obj or string", "persist-search", `/page?searchTerm=${searchTerm}`)
 
