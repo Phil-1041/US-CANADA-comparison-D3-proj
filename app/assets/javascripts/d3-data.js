@@ -14,8 +14,8 @@ $(document).ready( function() {
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Transpose the data into layers
-  const rawData = JSON.parse($('#my-data').html())
-  const data = rawData.items
+  var rawData = JSON.parse($('#my-data').html())
+  var data = rawData.items
 
   var dataset = d3.layout.stack()(["viewCount", "likeCount"].map(function (stat) {
     return data.map(function (d) {
