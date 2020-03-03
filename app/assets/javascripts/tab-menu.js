@@ -26,7 +26,7 @@ $(document).on('click', '.fa-icon-wrapper', function () {
 })
 
 // Youtube Search AJAX Call 
-$(document).on('click', '#search', ()=> {
+$(document).on('click', '#search', function () {
   $('#loading-modal').css('display', 'flex')
 
   var searchTerm = $('#search-input').val()
