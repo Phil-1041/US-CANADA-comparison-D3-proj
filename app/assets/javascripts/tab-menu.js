@@ -87,7 +87,7 @@ $(document).ready( () => {
 
       $('#loading-modal').css('display', 'flex')
 
-      var` searchTerm = $('#search-input').val()
+      var searchTerm = $('#search-input').val()
       $('#search-input').val('')
       window.history.pushState("obj or string", "persist-search", `/page?searchTerm=${searchTerm}`)
 
