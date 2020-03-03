@@ -49,7 +49,7 @@ $(document).on('click', '#search', ()=> {
   })
 })
 
-$(document).on('click', '#reset', () => {
+$(document).on('click', '#reset', function() {
   $('#loading-modal').css('display', 'flex')
 
   window.history.pushState("obj or string", "persist-search", `/page`)
@@ -72,7 +72,7 @@ $(document).on('click', '#reset', () => {
 // persisting opened tab on page reload
 var openedTab = localStorage.getItem('openTab')
 
-$(document).ready( () => {
+$(document).ready( function() {
     $('.unselected').each(function () {
       if ($(this).attr("id") == openedTab) {
         $(this).removeClass('unselected').addClass('open')
