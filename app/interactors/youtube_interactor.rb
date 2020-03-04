@@ -1,8 +1,6 @@
-require '../assets/config/'
-
 class YoutubeInteractor
   
-  KEY = 'AIzaSyByDNkKDVniSbJQFgg_d6fWhvwalDnTvCc'
+  KEY = Rails.application.credentials.google[:api_key]
   BASE_URI = 'https://www.googleapis.com/youtube/v3/'.freeze
 
   def initialize(query = '', ids = [])
