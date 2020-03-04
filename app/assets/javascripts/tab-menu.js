@@ -79,37 +79,58 @@ $(document).ready( function() {
       }
     }); 
 
-  // prevent form submission by pressing enter when focused on input field
-  $(window).keydown(function (event) {
+  // Youtube Search AJAX Call 
+  $(document).on('click', '#search', function () {
+    $('#loading-modal').css('display', 'flex')
 
-    if (event.keyCode == 13 && event.target.id == 'search-input') {
-      event.preventDefault();
+    var searchTerm = $('#search-input').val()
+    $('#search-input').val('')
+    //persist search without reloading page 
+    window.history.pushState("obj or string", "persist-search", `/page?searchTerm=${searchTerm}`)
 
-      $('#loading-modal').css('display', 'flex')
-
-      var searchTerm = $('#search-input').val()
-      $('#search-input').val('')
-      window.history.pushState("obj or string", "persist-search", `/page?searchTerm=${searchTerm}`)
-
-      $.ajax({
-        url: '/search',
-        method: 'GET',
-        data: { searchTerm },
-      }).then(data => {
-        $('#search-header').html(searchTerm)
-        $('#tab').html(data.html)
-        $('#loading-modal').css('display', 'none')
-        $('#my-data').change()
-      }).fail(error => {
-        console.log(error)
-        $('#loading-modal').html('--request failed [Bad Request]--')
-      })
-    }
-  });
-
+    $.ajax({
+      url: '/search',
+      method: 'GET',
+      data: {searchTerm},
+    }).then( data => {
+      $('#search-header').html(searchTerm)
+      $('#tabs').html(data.html)
+      $('#loading-modal').css('display', 'none')
+      $('#my-data').change()
+    }).fail( error => {
+      console.log(error)
+      $('#loading-modal').html('--request failed [Bad Request]--')
+    })
+  })
   $(document).on('click', '#name', function(){
     window.location = '/page'
   })
 
 });
 
+$(document).keydown(function (event) {
+
+  if (event.keyCode == 13 && event.target.id == 'search-input') {
+    event.preventDefault();
+
+    // $('#loading-modal').css('display', 'flex')
+
+    // var searchTerm = $('#search-input').val()
+    // $('#search-input').val('')
+    // window.history.pushState("obj or string", "persist-search", `/page?searchTerm=${searchTerm}`)
+
+    // $.ajax({
+    //   url: '/search',
+    //   method: 'GET',
+    //   data: { searchTerm },
+    // }).then(data => {
+    //   $('#search-header').html(searchTerm)
+    //   $('#tab').html(data.html)
+    //   $('#loading-modal').css('display', 'none')
+    //   $('#my-data').change()
+    // }).fail(error => {
+    //   console.log(error)
+    //   $('#loading-modal').html('--request failed [Bad Request]--')
+    // })
+  }
+});
