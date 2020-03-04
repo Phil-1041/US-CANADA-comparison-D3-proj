@@ -16,6 +16,10 @@ $(document).ready( function() {
   // Transpose the data into layers
   var rawData = JSON.parse($('#my-data').html())
   var data = rawData.items
+    //reduce x-axis lables so that they do not overlap
+    for(let i = 0; i < data.length ; i++){
+      data[i].snippet.title = data[i].snippet.title.slice(0,20)
+    }
 
   var dataset = d3.layout.stack()(["viewCount", "likeCount"].map(function (stat) {
     return data.map(function (d) {
@@ -58,7 +62,7 @@ $(document).ready( function() {
     .tickSize(10, 0, 0)
     .tickFormat(function (d) { return d });
     
-    var xAxis = d3.svg.axis()
+  var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
     .tickSize(0)
@@ -73,8 +77,8 @@ $(document).ready( function() {
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis)
     .selectAll("text")
-      .attr("transform", "rotate(90)")
-      .style("text-anchor", "start");
+      // .attr("transform", "rotate(90)")
+      // .style("text-anchor", "start");
 
   // Create groups for each series, rects for each segment 
   var groups = svg.selectAll("g.stats")
@@ -210,8 +214,8 @@ $(document).on('change', '#my-data', function () {
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis)
     .selectAll("text")
-    .attr("transform", "rotate(90)")
-    .style("text-anchor", "start");
+      // .attr("transform", "rotate(90)")
+      // .style("text-anchor", "start");
 
   // Create groups for each series, rects for each segment 
   var groups = svg.selectAll("g.stats")

@@ -1,6 +1,8 @@
+require '../assets/config/'
+
 class YoutubeInteractor
   
-  KEY = 'AIzaSyCDBqsPqMVrfeF8keFPnuqc7xaMlP_SrGE'
+  KEY = 'AIzaSyByDNkKDVniSbJQFgg_d6fWhvwalDnTvCc'
   BASE_URI = 'https://www.googleapis.com/youtube/v3/'.freeze
 
   def initialize(query = '', ids = [])
@@ -9,8 +11,10 @@ class YoutubeInteractor
     @results = {}
   end
 
+  #if .collect is erroring on nilclass means API key used up
+
   def get_search_results
-    _url = "#{BASE_URI}search?part=snippet&q=#{@q}&type=video&maxResults=20&key=#{KEY}"
+    _url = "#{BASE_URI}search?part=snippet&q=#{@q}&type=video&maxResults=5&key=#{KEY}"
     searchRes = HTTParty.get(_url).body
     res = JSON.parse(searchRes)
     @ids = res["items"].collect{ |i| i['id']['videoId'] }
